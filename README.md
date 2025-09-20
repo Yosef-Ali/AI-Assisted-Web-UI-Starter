@@ -35,6 +35,42 @@ This project uses Model Context Protocol (MCP) servers for AI-driven development
 - E2E testing
 - Accessibility checks
 
+#### Vercel MCP for Next.js (Template)
+- **Repository**: [vercel-labs/mcp-for-next.js](https://github.com/vercel-labs/mcp-for-next.js)
+- **Purpose**: Template for building custom MCP servers in Next.js
+- **Use Case**: Create project-specific MCP tools and integrations
+- **Deployment**: Can be deployed to Vercel with Fluid Compute
+- **Features**: HTTP and SSE transport support, Redis integration
+
+## 🛠️ Advanced MCP Development
+
+### Using Vercel MCP Template
+
+For custom MCP server development, you can use the [Vercel MCP for Next.js](https://github.com/vercel-labs/mcp-for-next.js) template:
+
+1. **Clone the template**:
+   ```bash
+   npx create-next-app@latest my-mcp-server --example https://github.com/vercel-labs/mcp-for-next.js
+   ```
+
+2. **Customize your MCP tools** in `app/[transport]/route.ts`
+
+3. **Deploy to Vercel** with Fluid Compute enabled
+
+4. **Add to your mcp.json**:
+   ```json
+   {
+     "mcpServers": {
+       "custom-nextjs": {
+         "command": "npx",
+         "args": ["your-custom-mcp-server"]
+       }
+     }
+   }
+   ```
+
+This allows you to create project-specific MCP tools for your development workflow.
+
 ## 📚 Documentation
 
 - `AI_SETUP_INSTRUCTIONS.md` - Complete setup guide for AI
@@ -88,6 +124,9 @@ After AI completes setup, you'll also have:
 ├── public/               # Static assets
 └── ...                   # Other Next.js files
 ```
+
+### Custom MCP Servers
+You can extend this setup by adding custom MCP servers using the [Vercel MCP template](https://github.com/vercel-labs/mcp-for-next.js) for project-specific tools and integrations.
 
 ## 🎯 Next Steps
 
