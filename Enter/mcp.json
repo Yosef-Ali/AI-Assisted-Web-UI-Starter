@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "nextjs": {
+      "command": "npx",
+      "args": ["-y", "@vercel-labs/mcp-server-nextjs"]
+    },
+    "shadcn": {
+      "command": "npx",
+      "args": ["-y", "@shadcn/mcp"]
+    },
+    "playwright": {
+      "command": "npx",
+      "args": ["-y", "@playwright/mcp"]
+    }
+  }
+}

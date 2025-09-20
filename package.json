@@ -1,0 +1,9 @@
+{
+    "name": "AI-Assisted-Web-UI-Starter",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "mcp:setup": "echo 'MCP servers configured - use your AI client to proceed'",
+        "mcp:verify": "echo 'Ask your AI to verify MCP connections'"
+    }
+}
