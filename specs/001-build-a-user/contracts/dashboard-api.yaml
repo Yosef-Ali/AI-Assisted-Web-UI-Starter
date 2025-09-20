@@ -1,0 +1,691 @@
+openapi: 3.0.3
+info:
+  title: User Dashboard Analytics API
+  version: 1.0.0
+  description: API for user dashboard with analytics charts and real-time data
+  contact:
+    name: Dashboard API Support
+    email: support@dashboard.example.com
+
+servers:
+  - url: https://api.dashboard.example.com/v1
+    description: Production server
+  - url: https://staging-api.dashboard.example.com/v1
+    description: Staging server
+
+security:
+  - bearerAuth: []
+
+paths:
+  /dashboards:
+    get:
+      summary: Get user dashboards
+      description: Retrieve all dashboards for the authenticated user
+      operationId: getDashboards
+      tags:
+        - Dashboards
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  dashboards:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Dashboard'
+                  total:
+                    type: integer
+                    minimum: 0
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+    post:
+      summary: Create new dashboard
+      description: Create a new dashboard for the authenticated user
+      operationId: createDashboard
+      tags:
+        - Dashboards
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DashboardCreate'
+      responses:
+        '201':
+          description: Dashboard created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dashboard'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /dashboards/{dashboardId}:
+    get:
+      summary: Get dashboard by ID
+      description: Retrieve a specific dashboard with its charts and configuration
+      operationId: getDashboard
+      tags:
+        - Dashboards
+      parameters:
+        - name: dashboardId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dashboard'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+    put:
+      summary: Update dashboard
+      description: Update an existing dashboard's configuration
+      operationId: updateDashboard
+      tags:
+        - Dashboards
+      parameters:
+        - name: dashboardId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DashboardUpdate'
+      responses:
+        '200':
+          description: Dashboard updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dashboard'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+    delete:
+      summary: Delete dashboard
+      description: Delete a dashboard and all its associated charts
+      operationId: deleteDashboard
+      tags:
+        - Dashboards
+      parameters:
+        - name: dashboardId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Dashboard deleted successfully
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /dashboards/{dashboardId}/charts:
+    get:
+      summary: Get dashboard charts
+      description: Retrieve all charts for a specific dashboard
+      operationId: getDashboardCharts
+      tags:
+        - Charts
+      parameters:
+        - name: dashboardId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  charts:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Chart'
+                  total:
+                    type: integer
+                    minimum: 0
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+    post:
+      summary: Add chart to dashboard
+      description: Create a new chart for the specified dashboard
+      operationId: createChart
+      tags:
+        - Charts
+      parameters:
+        - name: dashboardId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChartCreate'
+      responses:
+        '201':
+          description: Chart created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Chart'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /charts/{chartId}/data:
+    get:
+      summary: Get chart data
+      description: Retrieve data points for a specific chart within a time range
+      operationId: getChartData
+      tags:
+        - Charts
+      parameters:
+        - name: chartId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: startDate
+          in: query
+          schema:
+            type: string
+            format: date-time
+        - name: endDate
+          in: query
+          schema:
+            type: string
+            format: date-time
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/DataPoint'
+                  total:
+                    type: integer
+                    minimum: 0
+                  hasMore:
+                    type: boolean
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /metrics:
+    get:
+      summary: Get available metrics
+      description: Retrieve all available metrics that can be used in charts
+      operationId: getMetrics
+      tags:
+        - Metrics
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metrics:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Metric'
+                  total:
+                    type: integer
+                    minimum: 0
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /export/dashboard/{dashboardId}:
+    get:
+      summary: Export dashboard data
+      description: Export dashboard data in various formats
+      operationId: exportDashboard
+      tags:
+        - Export
+      parameters:
+        - name: dashboardId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: format
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [csv, json, pdf]
+        - name: startDate
+          in: query
+          schema:
+            type: string
+            format: date-time
+        - name: endDate
+          in: query
+          schema:
+            type: string
+            format: date-time
+      responses:
+        '200':
+          description: Export file generated successfully
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+components:
+  schemas:
+    Dashboard:
+      type: object
+      required:
+        - id
+        - userId
+        - name
+        - layout
+        - createdAt
+        - updatedAt
+        - isActive
+      properties:
+        id:
+          type: string
+          format: uuid
+        userId:
+          type: string
+        name:
+          type: string
+          minLength: 1
+          maxLength: 100
+        description:
+          type: string
+        layout:
+          $ref: '#/components/schemas/DashboardLayout'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        isActive:
+          type: boolean
+
+    DashboardCreate:
+      type: object
+      required:
+        - name
+        - layout
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 100
+        description:
+          type: string
+        layout:
+          $ref: '#/components/schemas/DashboardLayout'
+
+    DashboardUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 100
+        description:
+          type: string
+        layout:
+          $ref: '#/components/schemas/DashboardLayout'
+        isActive:
+          type: boolean
+
+    DashboardLayout:
+      type: object
+      required:
+        - columns
+        - rows
+        - gap
+        - responsive
+      properties:
+        columns:
+          type: integer
+          minimum: 1
+          maximum: 12
+        rows:
+          type: integer
+          minimum: 1
+          maximum: 20
+        gap:
+          type: integer
+          minimum: 0
+          maximum: 50
+        responsive:
+          type: boolean
+
+    Chart:
+      type: object
+      required:
+        - id
+        - dashboardId
+        - type
+        - title
+        - metric
+        - config
+        - position
+        - size
+        - refreshInterval
+        - lastUpdated
+      properties:
+        id:
+          type: string
+          format: uuid
+        dashboardId:
+          type: string
+          format: uuid
+        type:
+          type: string
+          enum: [bar, line, pie, area, scatter, gauge]
+        title:
+          type: string
+          minLength: 1
+          maxLength: 200
+        metric:
+          type: string
+        config:
+          $ref: '#/components/schemas/ChartConfig'
+        position:
+          $ref: '#/components/schemas/GridPosition'
+        size:
+          $ref: '#/components/schemas/GridSize'
+        refreshInterval:
+          type: integer
+          minimum: 5
+          maximum: 3600
+        lastUpdated:
+          type: string
+          format: date-time
+
+    ChartCreate:
+      type: object
+      required:
+        - type
+        - title
+        - metric
+        - config
+        - position
+        - size
+        - refreshInterval
+      properties:
+        type:
+          type: string
+          enum: [bar, line, pie, area, scatter, gauge]
+        title:
+          type: string
+          minLength: 1
+          maxLength: 200
+        metric:
+          type: string
+        config:
+          $ref: '#/components/schemas/ChartConfig'
+        position:
+          $ref: '#/components/schemas/GridPosition'
+        size:
+          $ref: '#/components/schemas/GridSize'
+        refreshInterval:
+          type: integer
+          minimum: 5
+          maximum: 3600
+
+    ChartConfig:
+      type: object
+      required:
+        - colors
+        - showLegend
+        - showGrid
+        - animation
+        - interactive
+      properties:
+        colors:
+          type: array
+          items:
+            type: string
+          minItems: 1
+        showLegend:
+          type: boolean
+        showGrid:
+          type: boolean
+        animation:
+          type: boolean
+        interactive:
+          type: boolean
+
+    GridPosition:
+      type: object
+      required:
+        - x
+        - y
+      properties:
+        x:
+          type: integer
+          minimum: 0
+        y:
+          type: integer
+          minimum: 0
+
+    GridSize:
+      type: object
+      required:
+        - width
+        - height
+      properties:
+        width:
+          type: integer
+          minimum: 1
+          maximum: 12
+        height:
+          type: integer
+          minimum: 1
+          maximum: 20
+
+    DataPoint:
+      type: object
+      required:
+        - id
+        - metricId
+        - value
+        - timestamp
+        - quality
+      properties:
+        id:
+          type: string
+          format: uuid
+        metricId:
+          type: string
+        value:
+          type: number
+        timestamp:
+          type: string
+          format: date-time
+        metadata:
+          type: object
+        quality:
+          type: string
+          enum: [high, medium, low, invalid]
+
+    Metric:
+      type: object
+      required:
+        - id
+        - name
+        - dataType
+        - aggregation
+        - unit
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        unit:
+          type: string
+        dataType:
+          type: string
+          enum: [number, percentage, currency, duration]
+        aggregation:
+          type: string
+          enum: [sum, avg, count, min, max]
+        format:
+          type: string
+        thresholds:
+          type: array
+          items:
+            $ref: '#/components/schemas/Threshold'
+
+    Threshold:
+      type: object
+      required:
+        - value
+        - operator
+        - severity
+        - message
+      properties:
+        value:
+          type: number
+        operator:
+          type: string
+          enum: [gt, lt, eq, gte, lte]
+        severity:
+          type: string
+          enum: [info, warning, error]
+        message:
+          type: string
+
+  responses:
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    InternalError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+
+  schemas:
+    Error:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+        details:
+          type: object
+
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT</content>
+<parameter name="filePath">/Users/mekdesyared/AI-Assisted-Web-UI-Starter/specs/001-build-a-user/contracts/dashboard-api.yaml
