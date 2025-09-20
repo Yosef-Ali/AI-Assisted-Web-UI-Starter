@@ -53,34 +53,41 @@
 - [ ] T005 [P] Contract test GET /api/users/{id} in tests/contract/test_users_get.py
 - [ ] T006 [P] Integration test user registration in tests/integration/test_registration.py
 - [ ] T007 [P] Integration test auth flow in tests/integration/test_auth.py
+- [ ] T008 [P] Accessibility test for main navigation in tests/accessibility/test_navigation.py
+- [ ] T009 [P] Keyboard navigation test in tests/accessibility/test_keyboard.py
 
 ## Phase 3.3: Core Implementation (ONLY after tests are failing)
-- [ ] T008 [P] User model in src/models/user.py
-- [ ] T009 [P] UserService CRUD in src/services/user_service.py
-- [ ] T010 [P] CLI --create-user in src/cli/user_commands.py
-- [ ] T011 POST /api/users endpoint
-- [ ] T012 GET /api/users/{id} endpoint
-- [ ] T013 Input validation
-- [ ] T014 Error handling and logging
+- [ ] T010 [P] User model in src/models/user.py
+- [ ] T011 [P] UserService CRUD in src/services/user_service.py
+- [ ] T012 [P] CLI --create-user in src/cli/user_commands.py
+- [ ] T013 POST /api/users endpoint
+- [ ] T014 GET /api/users/{id} endpoint
+- [ ] T015 Input validation
+- [ ] T016 Error handling and logging
+- [ ] T017 [P] Accessible form components in src/components/forms/
+- [ ] T018 [P] Keyboard navigation utilities in src/utils/accessibility.ts
 
 ## Phase 3.4: Integration
-- [ ] T015 Connect UserService to DB
-- [ ] T016 Auth middleware
-- [ ] T017 Request/response logging
-- [ ] T018 CORS and security headers
+- [ ] T019 Connect UserService to DB
+- [ ] T020 Auth middleware
+- [ ] T021 Request/response logging
+- [ ] T022 CORS and security headers
+- [ ] T023 Accessibility middleware integration
 
 ## Phase 3.5: Polish
-- [ ] T019 [P] Unit tests for validation in tests/unit/test_validation.py
-- [ ] T020 Performance tests (<200ms)
-- [ ] T021 [P] Update docs/api.md
-- [ ] T022 Remove duplication
-- [ ] T023 Run manual-testing.md
+- [ ] T024 [P] Unit tests for validation in tests/unit/test_validation.py
+- [ ] T025 Performance tests (<200ms)
+- [ ] T026 [P] Update docs/api.md
+- [ ] T027 Remove duplication
+- [ ] T028 Run manual-testing.md
+- [ ] T029 [P] Accessibility audit and WCAG compliance check
+- [ ] T030 [P] Lighthouse performance audit
 
 ## Dependencies
-- Tests (T004-T007) before implementation (T008-T014)
-- T008 blocks T009, T015
-- T016 blocks T018
-- Implementation before polish (T019-T023)
+- Tests (T004-T009) before implementation (T010-T018)
+- T010 blocks T011, T019
+- T017 blocks T023
+- Implementation before polish (T024-T030)
 
 ## Parallel Example
 ```

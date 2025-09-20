@@ -47,7 +47,34 @@
 ## Constitution Check
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+### Modern React Architecture Compliance
+- [ ] Uses React 18+ with modern hooks and functional components
+- [ ] Follows component composition patterns over inheritance
+- [ ] Implements proper state management (Context/Zustand for complex state)
+
+### TypeScript Excellence Compliance
+- [ ] Strict TypeScript configuration enabled
+- [ ] All interfaces and types explicitly defined
+- [ ] Generic types used appropriately for reusability
+
+### Accessibility First Compliance (NON-NEGOTIABLE)
+- [ ] WCAG 2.1 AA standards met for all UI elements
+- [ ] Semantic HTML used throughout
+- [ ] Keyboard navigation fully supported
+- [ ] Color contrast ratios meet requirements
+- [ ] Screen reader compatibility verified
+
+### Component-Driven Development Compliance
+- [ ] Shadcn/ui components used as primary UI library
+- [ ] Components designed for reusability with comprehensive props
+- [ ] Storybook or similar documentation tool integrated
+
+### Performance & Quality Compliance
+- [ ] Lighthouse scores targeted above 90 for all metrics
+- [ ] Bundle size optimization implemented
+- [ ] Core Web Vitals requirements met
+- [ ] ESLint and Prettier configuration applied
+- [ ] Comprehensive test coverage planned
 
 ## Project Structure
 
