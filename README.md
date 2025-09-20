@@ -23,12 +23,6 @@ This project uses Model Context Protocol (MCP) servers for AI-driven development
 
 ### Available MCP Servers
 
-#### Next.js MCP (@vercel-labs/mcp-server-nextjs)
-- Project initialization
-- Route management  
-- API development
-- Build optimization
-
 #### Shadcn MCP (@shadcn/mcp)
 - Component installation
 - UI system setup

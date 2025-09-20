@@ -1,9 +1,7 @@
-# AI Prompt Library for MCP Development
-
 ## Initial Setup
 ```
 Using the MCP servers available:
-1. Create a Next.js project with TypeScript and Tailwind
+1. Set up a Next.js project with TypeScript and Tailwind
 2. Initialize Shadcn UI with a New York style and slate color
 3. Install essential components (button, card, form, navigation)
 4. Set up a basic layout with header and footer
@@ -21,11 +19,10 @@ Using Shadcn MCP:
 
 ## Page Creation
 ```
-Using Next.js MCP:
-- Create a new page at /dashboard
-- Set up API route at /api/users
-- Add middleware for authentication
-- Configure environment variables
+Create a new page at /dashboard with Shadcn components
+Set up API route at /api/users
+Add middleware for authentication
+Configure environment variables
 ```
 
 ## Testing
@@ -41,9 +38,9 @@ Using Playwright MCP:
 ## Full Feature Implementation
 ```
 I need a user authentication system:
-1. Use Next.js MCP to create /login and /register pages
+1. Create /login and /register pages with Shadcn forms
 2. Use Shadcn MCP to add form, input, button, card components
-3. Use Next.js MCP to create /api/auth routes
+3. Set up API routes for authentication
 4. Use Playwright MCP to test the login flow
 5. Add proper error handling and loading states
 ```
