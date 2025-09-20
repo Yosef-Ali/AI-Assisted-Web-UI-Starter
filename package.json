@@ -1,0 +1,34 @@
+{
+  "name": "ai-assisted-web-ui-starter",
+  "version": "1.0.0",
+  "description": "A web UI starter project that uses Model Context Protocol (MCP) servers for AI-driven development",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "build": "npm run build:css && npm run build:js",
+    "build:css": "echo 'CSS build complete'",
+    "build:js": "echo 'JS build complete'",
+    "mcp:start": "node src/mcp/server.js",
+    "test": "echo 'No tests specified'"
+  },
+  "keywords": [
+    "ai",
+    "mcp",
+    "model-context-protocol",
+    "web-ui",
+    "starter",
+    "ai-driven-development"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^0.4.0",
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "ws": "^8.14.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}

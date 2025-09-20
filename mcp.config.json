@@ -1,0 +1,32 @@
+{
+  "mcpServers": {
+    "ai-web-ui-starter": {
+      "command": "node",
+      "args": ["src/mcp/server.js"],
+      "env": {
+        "NODE_ENV": "development"
+      }
+    }
+  },
+  "tools": {
+    "generate_component": {
+      "enabled": true,
+      "description": "Generate UI components with AI assistance"
+    },
+    "analyze_code": {
+      "enabled": true,
+      "description": "Analyze code for improvements and suggestions"
+    },
+    "get_project_context": {
+      "enabled": true,
+      "description": "Retrieve current project context and structure"
+    }
+  },
+  "capabilities": [
+    "AI-driven development",
+    "Component generation",
+    "Code analysis",
+    "Context management",
+    "Real-time assistance"
+  ]
+}

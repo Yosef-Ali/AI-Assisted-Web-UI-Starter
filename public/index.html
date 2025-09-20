@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Assisted Web UI Starter</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-brand">
+                <h1>🤖 AI-Assisted Web UI Starter</h1>
+            </div>
+            <div class="nav-status">
+                <span id="mcp-status" class="status-indicator">MCP: Connecting...</span>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <h2>Model Context Protocol (MCP) Integration</h2>
+            <p>This starter project demonstrates AI-driven development capabilities using MCP servers.</p>
+        </section>
+
+        <section class="features">
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>🔧 AI-Driven Development</h3>
+                    <p>Generate components, analyze code, and get intelligent suggestions.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🏗️ Component Generation</h3>
+                    <p>Automatically create UI components with AI assistance.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>📊 Code Analysis</h3>
+                    <p>Get real-time code analysis and improvement suggestions.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🔄 Context Management</h3>
+                    <p>Maintain project context for better AI assistance.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="demo">
+            <h3>MCP Demo Interface</h3>
+            <div class="demo-controls">
+                <button id="generate-btn" class="btn btn-primary">Generate Component</button>
+                <button id="analyze-btn" class="btn btn-secondary">Analyze Code</button>
+                <button id="context-btn" class="btn btn-tertiary">Get Context</button>
+            </div>
+            <div class="demo-output">
+                <pre id="output"></pre>
+            </div>
+        </section>
+
+        <section class="code-editor">
+            <h3>Code Playground</h3>
+            <textarea id="code-input" placeholder="Enter your code here for analysis...">
+function greetUser(name) {
+    var message = "Hello, " + name + "!";
+    return message;
+}</textarea>
+            <div class="editor-controls">
+                <button id="analyze-code-btn" class="btn btn-primary">Analyze This Code</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 AI-Assisted Web UI Starter - Powered by Model Context Protocol</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
