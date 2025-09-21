@@ -12,6 +12,13 @@
             "args": [
                 "@playwright/mcp@latest"
             ]
+        },
+        "supabase": {
+            "command": "npx",
+            "args": [
+                "supabase",
+                "mcp"
+            ]
         }
     }
 }

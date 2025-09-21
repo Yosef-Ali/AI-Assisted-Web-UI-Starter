@@ -112,4 +112,38 @@ npm run dev -- -p 3001
 3. Test continuously with Playwright MCP
 4. Commit your changes regularly
 
+## Testing Overview
+
+### Unit / Service Tests (Jest)
+Run the fast TypeScript service + route unit tests:
+```bash
+npm test
+```
+Watch mode during development:
+```bash
+npm run test:watch
+```
+
+### End-to-End API Tests (Playwright)
+These spin up the Next.js dev server (port 3000) and hit real API routes.
+```bash
+npm run test:e2e
+```
+In CI or headless environments:
+```bash
+npm run test:e2e:ci
+```
+Notes:
+- GET /api/projects currently returns a service error (500) without Supabase env vars; the e2e test accommodates this until a mock or local DB is configured.
+- Supply Supabase keys to exercise full success path:
+```bash
+export NEXT_PUBLIC_SUPABASE_URL=... \
+	NEXT_PUBLIC_SUPABASE_ANON_KEY=...
+npm run test:e2e
+```
+
+### Adding More E2E Tests
+Create additional specs in `tests/e2e/*.spec.ts` importing from `@playwright/test`. Use the shared `baseURL` for route calls. Prefer API request fixtures (`request`) over full browser contexts until UI flows are ready.
+
+
 Happy coding! 🎉
